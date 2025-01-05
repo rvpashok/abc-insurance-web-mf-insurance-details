@@ -1,0 +1,55 @@
+<!-- Menu Bar Html Started-- >
+  <div class="" >
+    <p-megaMenu [model]="this.categoryMenuBarItem" styleClass= "flex" [style]="{'display':'inline-flex','width':'100%','border-radius': '0.1rem', 'background-image': 'linear-gradient(to right, var(--bluegray-200), var(--bluegray-200))'}">
+        <ng-template pTemplate="start">
+            <div class="justify-content-start" (click)=onClickHomeIcon() style="margin-right: 10px;margin-left: 1px; cursor: pointer;">
+                <img src="./assets/amcart-high-resolution-logo-transparent.png" height="50" class="mr-4" />
+            </div>
+        </ng-template>
+        
+        <ng-template pTemplate="end">
+            <div style="width: 100% !important;">  
+                <p-button label="Sign In" (onClick)="login($event)"  icon="fa fa-sign-in" [style]="{'margin-right': '3%'}"> </p-button>
+                <p-splitButton label="Account" [model]="this.items" icon="fa fa-user-o" (onClick)="save('info')" styleClass="p-button-raised p-button-text mr-2 mb-2" 
+                         [style]="{'margin-right': '3%'}"></p-splitButton>
+                <p-button label="Sign Out" (onClick)="logout($event)" icon="fa fa-sign-out" [style]="{'margin-right': '3%'}" ></p-button>
+            </div>       
+           
+        </ng-template> 
+
+    </p-megaMenu>
+</div>
+< !-- Menu Bar Html Ended-->
+
+
+<p-megamenu [(ngModel)]= "items" [model]="items" [style]="{'border-radius': '0.1rem', 'background-image': 'linear-gradient(to right, var(--gray-300), var(--gray-300))'}" styleClass="p-4 bg-surface-0 dark:bg-surface-900">
+    <ng-template #start>
+        <div class="justify-content-start" (click)=onClickHomeIcon() style="margin-right: 10px;margin-left: 1px; cursor: pointer;">
+            <img src="../assets/amcart-high-resolution-logo-transparent.png" height="50" class="mr-4" />
+        </div>
+    </ng-template>
+    <ng-template #item let-item>
+        <a *ngIf="item.root" pRipple class="flex items-center cursor-pointer px-6 py-2 overflow-hidden relative font-semibold text-lg" style="border-radius: 0.1rem">
+            <i [ngClass]="item.icon"></i>
+            <span class="ml-3">{{ item.label }}</span>
+        </a>
+        <a *ngIf="!item.root && !item.image" class="flex items-center p-4 cursor-pointer mb-2 gap-2">
+            <!-- <span class="inline-flex items-center justify-center rounded-full bg-primary text-primary-contrast w-12 h-12">
+                <i [ngClass]="item.icon + ' text-lg'"></i>
+            </span> -->
+            <span class="inline-flex flex-col gap-1">
+                <span class="font-medium text-lg text-surface-100 dark:text-surface-0">{{ item.label }}</span>
+                <span class="whitespace-nowrap">{{ item.subtext }}</span>
+            </span>
+        </a>
+        <div *ngIf="item.image" class="flex flex-col items-start gap-4">
+            <img [src]="item.image" alt="megamenu-demo" class="w-full" />
+            <span>{{ item.subtext }}</span>
+            <p-button [label]="item.label" [outlined]="true"></p-button>
+        </div>
+    </ng-template>
+    <!-- <ng-template #end>
+        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+    </ng-template> -->
+</p-megamenu>
+

@@ -1,0 +1,21 @@
+.grid label {
+    display: block;
+    text-align: left;
+    margin-left: 1.5rem;
+    font-weight: bold;
+  }
+
+  .grid input {
+    margin-bottom: 0.5rem;
+    margin-left: 1.5rem;
+  }
+
+  .p-accordionheader {
+    font-weight: bold;
+    border-bottom: 1px solid #ecdede;
+  }
+
+  .p-accordioncontent	 {
+    border: 1px solid #3f1c26; /* Match the header or use a different color */
+    border-top: none; /* Avoid double border between header and content */
+  }
