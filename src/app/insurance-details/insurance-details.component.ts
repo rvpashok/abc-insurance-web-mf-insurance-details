@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-insurance-details',
+  standalone: true,
   imports: [CardModule, AccordionModule, ButtonModule, FormsModule, InputTextModule, TableModule],
   templateUrl: './insurance-details.component.html',
   styleUrl: './insurance-details.component.scss'
