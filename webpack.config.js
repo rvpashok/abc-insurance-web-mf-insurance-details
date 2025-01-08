@@ -5,8 +5,7 @@ module.exports = withModuleFederationPlugin({
   name: 'web-mf-insurance',
 
   exposes: {
-    //'./Component': './src/app/app.component.ts',
-    './InsuranceModule': './src/app/insurance-details/insurance-details.module.ts',
+    './InsuranceModule': './src/app/insurance-details/insurance-details.module.ts'
   },
 
   shared: {

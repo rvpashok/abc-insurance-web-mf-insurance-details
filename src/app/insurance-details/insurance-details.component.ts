@@ -24,11 +24,14 @@ export class InsuranceDetailsComponent implements OnInit{
   policyDetails: object | undefined;
   public insuranceDetails : InsuranceDetails | any;
 
-  constructor(private commonService: CommonService){
+  totalPaymentValue: number | any;
+  totalClaimValue: number | any;
+
+  constructor(private commonService: CommonService) {
     
   }
 
-  activeIndexChange(index : number){
+  activeIndexChange(index : number) {
       this.activeIndex = index
   }
 
@@ -38,6 +41,23 @@ export class InsuranceDetailsComponent implements OnInit{
     var insuranceDetailsData = this.commonService.getItem("insurance_health_U001_data");
     this.insuranceDetails = JSON.parse(insuranceDetailsData?insuranceDetailsData: "");
     console.log("getDetails: " + this.insuranceDetails);
+    this.calculateTotalPayment(this.insuranceDetails);
+  }
+
+  calculateTotalPayment(insuranceDetails: InsuranceDetails) {
+      console.log("Total Payment calculate call to web-worker:");
+      if (typeof Worker !== 'undefined' && insuranceDetails !== null) {
+        const worker = new Worker(new URL('../worker.worker', import.meta.url));
+        worker.onmessage = ({ data }) => {
+          this.totalPaymentValue = data.totalPaymentValue;
+          this.totalClaimValue = data.totalClaimValue;
+          console.log("Results from worker: " + data);
+          worker.terminate();
+        };
+        worker.postMessage(insuranceDetails);
+      } else {
+        console.error('Web Workers are not supported in this environment.');
+      }
   }
 
   getInsuranceDisplayName(type: PolicyType){
