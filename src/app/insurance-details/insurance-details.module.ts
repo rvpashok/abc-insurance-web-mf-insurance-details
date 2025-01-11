@@ -5,7 +5,7 @@ import { InsuranceDetailsComponent } from './insurance-details.component';
 
 export const CLAIMS_ROUTES: Routes = [
   {
-    path: 'insurance',
+    path: 'details',
     component: InsuranceDetailsComponent
   }
 ];

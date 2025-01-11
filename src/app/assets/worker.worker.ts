@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 
-import { InsuranceDetails } from "./model/insurance-details";
+import { InsuranceDetails } from "../model/insurance-details";
 
 addEventListener('message', ({ data }) => {
   const response = `worker response to ${data}`;

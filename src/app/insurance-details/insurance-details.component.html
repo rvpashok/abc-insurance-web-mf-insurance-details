@@ -1,218 +1,232 @@
-<div style="display: grid; width: 90%; margin-left: 5%;">
-    <h1>{{getInsuranceDisplayName(insuranceDetails.policyDetails.type)}}</h1>
-    <p-accordion [(value)]="active">
-        <p-accordion-panel value="0">
-            <p-accordion-header>Policy Summary</p-accordion-header>
-            <p-accordion-content>
-                <div class="grid">
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="policy-number">Policy Number: </label>
+<div style="display: grid; width: 90%; margin-left: 5%;margin-top: 0.5%;">
+    <div *ngIf="!insuranceDetails">
+        <p-card header="">
+            <h1>No data found for this user</h1>
+        </p-card>
+    </div>
+    <div *ngIf="insuranceDetails">
+        <p-card header="">
+            <h1>{{policyDetails.policyTypeDisplayName}}</h1>
+        </p-card>
+        <p-accordion [(value)]="active">
+            <p-accordion-panel value="0">
+                <p-accordion-header>Policy Summary</p-accordion-header>
+                <p-accordion-content>
+                    <div class="grid" style="margin-top:1rem">
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="policy-number">Policy Number</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-number" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.policyId" /> 
+                                </div>
                             </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="policy-number" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.policyId" /> 
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label  for="policy-start-date">Start Date</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-start-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.startDate" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="policy-status">Status</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-status" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.policyStatus" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="policy-expiry-date">End Date</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-expiry-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.expiryDate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="policy-premium-amount">Premium Amount</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-premium-amount" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.premiumAmount" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="next-premium-date">Next Premium Date</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="next-premium-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.nextPremiumDate" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="premium-frequency">Premium Frequency</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="premium-frequency" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.premiumFrequency" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="policy-type">Policy Type</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="policy-type" [disabled]="true" [(ngModel)]="policyDetails.policyTypeName" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label  for="policy-start-date">Start Date: </label>
+                </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel value="1">
+                <p-accordion-header>Insured Details</p-accordion-header>
+                <p-accordion-content>
+                    <div class="grid" style="margin-top:1rem">
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-user-id">User Id</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-user-id" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.userId" /> 
+                                </div>
                             </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="policy-start-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.startDate" /> 
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label  for="insured-first-name">First Name</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-first-name" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.firstName" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-last-name">Last Name</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-first-name" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.lastName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-age">Age</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-age" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.age" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-dob">Date of Birth</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-dob" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.dob" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-email">Email</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-email" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 sm:col-6 lg:col-6">
+                            <div class="grid">
+                                <div class="col-12 sm:col-6 lg:col-4 text-left">
+                                    <label for="insured-phone-number">Phone Number</label>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-5">
+                                    <input pInputText id="insured-phone-number" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.phoneNumber" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="policy-status">Status: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="policy-status" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.policyStatus" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="policy-expiry-date">End Date: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="policy-expiry-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.expiryDate" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="policy-premium-amount">Premium Amount: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="policy-premium-amount" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.premiumAmount" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="next-premium-date">Next Premium Date: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="next-premium-date" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.nextPremiumDate" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="premium-frequency">Premium Frequency: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="premium-frequency" [disabled]="true" [(ngModel)]="insuranceDetails.policyDetails.premiumFrequency" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </p-accordion-content>
-        </p-accordion-panel>
-        <p-accordion-panel value="1">
-            <p-accordion-header>Insured Details</p-accordion-header>
-            <p-accordion-content>
-                <div class="grid">
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-user-id">User Id: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-user-id" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.userId" /> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label  for="insured-first-name">First Name: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-first-name" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.firstName" /> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-last-name">Last Name: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-first-name" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.lastName" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-age">Age: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-age" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.age" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-dob">Date of Birth: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-dob" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.dob" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-email">Email: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-email" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.email" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 sm:col-6 lg:col-6">
-                        <div class="grid">
-                            <div class="col-12 sm:col-6 lg:col-4 text-left">
-                                <label for="insured-phone-number">Phone Number: </label>
-                            </div>
-                            <div class="col-12 sm:col-6 lg:col-5">
-                                <input pInputText id="insured-phone-number" [disabled]="true" [(ngModel)]="insuranceDetails.insuredDetails.phoneNumber" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </p-accordion-content>
-        </p-accordion-panel>
-        <p-accordion-panel value="2">
-            <p-accordion-header>Coverage Details</p-accordion-header>
-            <p-accordion-content>
-               
-            </p-accordion-content>
-        </p-accordion-panel>
-        <p-accordion-panel value="3">
-            <p-accordion-header>Claims History</p-accordion-header>
-            <p-accordion-content>
-                <p-table [value]="insuranceDetails.claimHistory" showGridlines [tableStyle]="{ 'min-width': '50rem' }">
+                </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel value="3">
+                <p-accordion-header>Claims History</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="insuranceDetails.claimHistory" showGridlines [tableStyle]="{ 'min-width': '50rem', 'margin-top':'1rem'}">
+                            <ng-template #header>
+                                <tr>
+                                    <th>Claim Id</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Register Date</th>
+                                    <th>Processed Date</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template #body let-claimHistory>
+                                <tr>
+                                    <td>{{ claimHistory.claimId }}</td>
+                                    <td>{{ claimHistory.description }}</td>
+                                    <td>{{ claimHistory.amount }}</td>
+                                    <td>{{ claimHistory.registeredDate }}</td>
+                                    <td>{{ claimHistory.processedDate }}</td>
+                                </tr>
+                            </ng-template>
+                    </p-table>
+                    <h4> Total Claim Received {{this.totalClaimValue}} </h4>
+                </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel value="4">
+                <p-accordion-header>Payments History</p-accordion-header>
+                <p-accordion-content>
+                    <p-table [value]="insuranceDetails.paymentHistory" showGridlines [tableStyle]="{ 'min-width': '50rem' , 'margin-top':'1rem'}">
                         <ng-template #header>
                             <tr>
-                                <th>Claim Id</th>
-                                <th>Description</th>
+                                <th>Payment Id</th>
                                 <th>Amount</th>
-                                <th>Register Date</th>
-                                <th>Processed Date</th>
+                                <th>Bank Name</th>
+                                <th>IFSC Code</th>
+                                <th>Transaction Date</th>
                             </tr>
                         </ng-template>
-                        <ng-template #body let-claimHistory>
+                        <ng-template #body let-paymentHistory>
                             <tr>
-                                <td>{{ claimHistory.claimId }}</td>
-                                <td>{{ claimHistory.description }}</td>
-                                <td>{{ claimHistory.amount }}</td>
-                                <td>{{ claimHistory.registeredDate }}</td>
-                                <td>{{ claimHistory.processedDate }}</td>
+                                <td>{{ paymentHistory.paymentId }}</td>
+                                <td>{{ paymentHistory.amount }}</td>
+                                <td>{{ paymentHistory.bankName }}</td>
+                                <td>{{ paymentHistory.ifscCode }}</td>
+                                <td>{{ paymentHistory.transactionDate }}</td>
+                                
                             </tr>
                         </ng-template>
-                </p-table>
-                <h4> Total Claim Received {{this.totalClaimValue}} </h4>
-            </p-accordion-content>
-        </p-accordion-panel>
-        <p-accordion-panel value="4">
-            <p-accordion-header>Payments History</p-accordion-header>
-            <p-accordion-content>
-                <p-table [value]="insuranceDetails.paymentHistory" showGridlines [tableStyle]="{ 'min-width': '50rem' }">
-                    <ng-template #header>
-                        <tr>
-                            <th>Payment Id</th>
-                            <th>Amount</th>
-                            <th>Bank Name</th>
-                            <th>IFSC Code</th>
-                            <th>Transaction Date</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template #body let-paymentHistory>
-                        <tr>
-                            <td>{{ paymentHistory.paymentId }}</td>
-                            <td>{{ paymentHistory.amount }}</td>
-                            <td>{{ paymentHistory.bankName }}</td>
-                            <td>{{ paymentHistory.ifscCode }}</td>
-                            <td>{{ paymentHistory.transactionDate }}</td>
-                            
-                        </tr>
-                    </ng-template>
-                </p-table>
-                <h4> Total Payment Received {{this.totalPaymentValue}} </h4>
-            </p-accordion-content>
-        </p-accordion-panel>
-    </p-accordion>
+                    </p-table>
+                    <h4> Total Payment Received {{this.totalPaymentValue}} </h4>
+                </p-accordion-content>
+            </p-accordion-panel>
+        </p-accordion>
+    </div>
+    
 </div>
