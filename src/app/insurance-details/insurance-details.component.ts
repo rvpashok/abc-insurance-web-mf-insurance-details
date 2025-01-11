@@ -69,7 +69,7 @@ export class InsuranceDetailsComponent implements OnInit {
   calculateTotalPayment(insuranceDetails: InsuranceDetails) {
       console.log("Total Payment calculate call to web-worker:");
       if (typeof Worker !== 'undefined' && insuranceDetails !== null) {
-        const worker = new Worker(new URL('../assets/worker.worker', import.meta.url));
+        const worker = new Worker(new URL('../worker.worker', import.meta.url));
         worker.onmessage = ({ data }) => {
           this.totalPaymentValue = data.totalPaymentValue;
           this.totalClaimValue = data.totalClaimValue;

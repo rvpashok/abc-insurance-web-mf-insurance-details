@@ -9,11 +9,6 @@
     margin-left: 1.5rem;
   }
 
-  // .p-accordionheader {
-  //   font-weight: bold;
-  //   border-bottom: 1px solid #ecdede;
-  // }
-
   .p-accordionheader  {
     text-decoration: underline;
     font-weight: bold;
@@ -23,8 +18,13 @@
     }
   }
 
-  .p-accordioncontent	 {
-    // border: 1px solid #3f1c26; /* Match the header or use a different color */
-    // border-top: none; /* Avoid double border between header and content */
-    //margin-top: 0.5rem;
+  .insurance-details-partent-div {
+    width: 90%; 
+    margin-left: 5%;
+    margin-top: 0.5%;
+  }
+
+  .payment-history-table {
+    min-width: '50rem';
+    margin-top:'1rem';
   }

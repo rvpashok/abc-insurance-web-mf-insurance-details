@@ -1,4 +1,4 @@
-<div style="display: grid; width: 90%; margin-left: 5%;margin-top: 0.5%;">
+<div class="insurance-details-partent-div">
     <div *ngIf="!insuranceDetails">
         <p-card header="">
             <h1>No data found for this user</h1>
@@ -12,7 +12,7 @@
             <p-accordion-panel value="0">
                 <p-accordion-header>Policy Summary</p-accordion-header>
                 <p-accordion-content>
-                    <div class="grid" style="margin-top:1rem">
+                    <div class="grid">
                         <div class="col-12 sm:col-6 lg:col-6">
                             <div class="grid">
                                 <div class="col-12 sm:col-6 lg:col-4 text-left">
@@ -99,7 +99,7 @@
             <p-accordion-panel value="1">
                 <p-accordion-header>Insured Details</p-accordion-header>
                 <p-accordion-content>
-                    <div class="grid" style="margin-top:1rem">
+                    <div class="grid">
                         <div class="col-12 sm:col-6 lg:col-6">
                             <div class="grid">
                                 <div class="col-12 sm:col-6 lg:col-4 text-left">
@@ -176,7 +176,7 @@
             <p-accordion-panel value="3">
                 <p-accordion-header>Claims History</p-accordion-header>
                 <p-accordion-content>
-                    <p-table [value]="insuranceDetails.claimHistory" showGridlines [tableStyle]="{ 'min-width': '50rem', 'margin-top':'1rem'}">
+                    <p-table [value]="insuranceDetails.claimHistory" showGridlines>
                             <ng-template #header>
                                 <tr>
                                     <th>Claim Id</th>
@@ -202,7 +202,7 @@
             <p-accordion-panel value="4">
                 <p-accordion-header>Payments History</p-accordion-header>
                 <p-accordion-content>
-                    <p-table [value]="insuranceDetails.paymentHistory" showGridlines [tableStyle]="{ 'min-width': '50rem' , 'margin-top':'1rem'}">
+                    <p-table [value]="insuranceDetails.paymentHistory" showGridlines>   
                         <ng-template #header>
                             <tr>
                                 <th>Payment Id</th>
