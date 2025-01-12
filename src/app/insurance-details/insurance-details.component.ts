@@ -7,10 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { InsuranceDetails, PolicyType } from '../model/insurance-details';
 import { CommonService } from '../services/common.service';
 import { TableModule } from 'primeng/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { loadRemoteModule } from '@angular-architects/module-federation';
-// import {UserProfileResponse} from 'web_mf_host/UserProfileResponse';
 
 @Component({
   selector: 'app-insurance-details',
@@ -40,15 +38,7 @@ export class InsuranceDetailsComponent implements OnInit {
       this.activeIndex = index
   }
 
-  async ngOnInit(): Promise<void> {
-
-  //  const { UserProfileResponse } = await import('web_mf_host/UserProfileResponse');
-
-  //   this.userProfileModule = await loadRemoteModule({
-  //     remoteName: 'web_mf_host',  // The name of the host application
-  //     exposedModule: 'UserProfileResponse',  // The exposed module from the host
-  //   });
-
+   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       const type = params.get('type');
       var profileId = this.commonService.getItem("profileId");
@@ -60,13 +50,12 @@ export class InsuranceDetailsComponent implements OnInit {
       let policyType: PolicyType = PolicyType[type as keyof typeof PolicyType];
       const dataKey = "insurance_" + policyType.toString().toLowerCase() + "_" + profileId + "_data";
       this.active = "0";
-      this.commonService.initializeSampleData();
       var insuranceDetailsData = this.commonService.getItem(dataKey);
       if(insuranceDetailsData !== null){
         this.insuranceDetails = JSON.parse(insuranceDetailsData?insuranceDetailsData: "");
         console.log("getDetails: " + this.insuranceDetails);
         this.getPolicyTypeInfo(this.insuranceDetails.policyDetails.type);
-        this.calculateTotalPayment(this.insuranceDetails);
+       // this.calculateTotalPayment(this.insuranceDetails);
       }
       else {
         console.log("No data found for the key: " + dataKey );
@@ -79,7 +68,7 @@ export class InsuranceDetailsComponent implements OnInit {
   calculateTotalPayment(insuranceDetails: InsuranceDetails) {
       console.log("Total Payment calculate call to web-worker:");
       if (typeof Worker !== 'undefined' && insuranceDetails !== null) {
-        const worker = new Worker(new URL('../worker.worker', import.meta.url));
+        const worker = new Worker(new URL('../insurance-web-worker.worker', import.meta.url));
         const worker1= new Worker(new URL('http://localhost:4201/worker.worker.js'));
         const worker2 = new Worker(
           new URL('/assets/worker/worker.worker.js', window.location.origin),

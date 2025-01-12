@@ -7,22 +7,14 @@ export const routes: Routes = [
         component: InsuranceDetailsComponent
     },
 
-    {
-        path:"test",
-        loadChildren: ()=> 
-        loadRemoteModule({
-            type: 'module',
-            remoteEntry: 'http://localhost:4200/remoteEntry.js',
-            exposedModule: './testModule'
-        }).then(m => m.SharedModule)
-    },
     // {
-    //     path:"test1",
+    //     path:"test-route",
     //     loadChildren: ()=> 
     //     loadRemoteModule({
-    //         type: 'script',
+    //         type: 'module',
     //         remoteEntry: 'http://localhost:4200/remoteEntry.js',
-    //     }).then(m => m.UserProfileResponse)
+    //         exposedModule: './testModule'
+    //     }).then(m => m.SharedModule)
     // }
 
 
