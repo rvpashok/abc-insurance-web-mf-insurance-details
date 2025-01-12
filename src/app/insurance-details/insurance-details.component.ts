@@ -27,7 +27,8 @@ export class InsuranceDetailsComponent implements OnInit {
 
   totalPaymentValue: number | any;
   totalClaimValue: number | any;
- 
+  isAuthenticated: boolean | any;
+
   userProfileModule: any;
 
   constructor(private commonService: CommonService, private route: ActivatedRoute) {
@@ -42,7 +43,12 @@ export class InsuranceDetailsComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       const type = params.get('type');
       var profileId = this.commonService.getItem("profileId");
+      if(!profileId || profileId === null || profileId == ""){
+        this.isAuthenticated = false;
+        throw Error("UnAuthorized");
+      }
       if (profileId) {
+        this.isAuthenticated = true;
         profileId = profileId.replace("auth0|", '');
         profileId = profileId.replace(/"/g, "");
       }

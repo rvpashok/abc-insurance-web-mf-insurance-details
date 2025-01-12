@@ -1,7 +1,12 @@
-<div class="insurance-details-partent-div">
+<div *ngIf="!isAuthenticated">
+    <p-card header="">
+        <h1>UnAuthorized Page. Login and ReTry</h1>
+    </p-card>
+</div>
+<div *ngIf="isAuthenticated" class="insurance-details-partent-div">
     <div *ngIf="!insuranceDetails">
         <p-card header="">
-            <h1>No data found for this user</h1>
+            <h1>No Insurance Details found for this user</h1>
         </p-card>
     </div>
     <div *ngIf="insuranceDetails">
