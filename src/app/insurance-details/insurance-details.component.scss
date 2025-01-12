@@ -1,30 +1,38 @@
-.grid label {
+// Variables for reusable values
+$margin-left: 1.5rem;
+$table-min-width: 50rem;
+$table-margin-top: 1rem;
+
+.grid {
+  label {
     display: block;
     text-align: left;
-    margin-left: 1.5rem;
+    margin-left: $margin-left;
   }
 
-  .grid input {
+  input {
     margin-bottom: 0.5rem;
-    margin-left: 1.5rem;
+    margin-left: $margin-left;
   }
+}
 
-  .p-accordionheader  {
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 20px;
-    &:hover {
-      color: #ff0000; /* Change color on hover */
-    }
-  }
+.p-accordionheader {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 20px;
 
-  .insurance-details-partent-div {
-    width: 90%; 
-    margin-left: 5%;
-    margin-top: 0.5%;
+  &:hover {
+    color: #ff0000; // Change color on hover
   }
+}
 
-  .payment-history-table {
-    min-width: '50rem';
-    margin-top:'1rem';
-  }
+.insurance-details-partent-div {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 0.5%;
+}
+
+.payment-history-table {
+  min-width: $table-min-width;
+  margin-top: $table-margin-top;
+}
