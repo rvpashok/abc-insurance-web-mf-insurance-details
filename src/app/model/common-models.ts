@@ -1,4 +1,4 @@
-export interface UserProfileResponse {
+export interface UserProfileResponse1 {
     'id': string;
     'auth0_id': string;
     'name' : string;

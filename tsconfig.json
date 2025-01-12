@@ -12,6 +12,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
+    "paths": {
+      "shared": [
+        "./projects/shared/src/public-api.ts"
+      ],
+      "web_mf_host/*": ["http://localhost:4200/remoteEntry.js"]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022"

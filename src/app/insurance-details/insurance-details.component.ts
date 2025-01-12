@@ -9,6 +9,8 @@ import { CommonService } from '../services/common.service';
 import { TableModule } from 'primeng/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { loadRemoteModule } from '@angular-architects/module-federation';
+// import {UserProfileResponse} from 'web_mf_host/UserProfileResponse';
 
 @Component({
   selector: 'app-insurance-details',
@@ -28,6 +30,7 @@ export class InsuranceDetailsComponent implements OnInit {
   totalPaymentValue: number | any;
   totalClaimValue: number | any;
  
+  userProfileModule: any;
 
   constructor(private commonService: CommonService, private route: ActivatedRoute) {
     
@@ -37,7 +40,14 @@ export class InsuranceDetailsComponent implements OnInit {
       this.activeIndex = index
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
+  //  const { UserProfileResponse } = await import('web_mf_host/UserProfileResponse');
+
+  //   this.userProfileModule = await loadRemoteModule({
+  //     remoteName: 'web_mf_host',  // The name of the host application
+  //     exposedModule: 'UserProfileResponse',  // The exposed module from the host
+  //   });
 
     this.route.queryParamMap.subscribe(params => {
       const type = params.get('type');
@@ -70,6 +80,12 @@ export class InsuranceDetailsComponent implements OnInit {
       console.log("Total Payment calculate call to web-worker:");
       if (typeof Worker !== 'undefined' && insuranceDetails !== null) {
         const worker = new Worker(new URL('../worker.worker', import.meta.url));
+        const worker1= new Worker(new URL('http://localhost:4201/worker.worker.js'));
+        const worker2 = new Worker(
+          new URL('/assets/worker/worker.worker.js', window.location.origin),
+          { type: 'module' }
+        );
+
         worker.onmessage = ({ data }) => {
           this.totalPaymentValue = data.totalPaymentValue;
           this.totalClaimValue = data.totalClaimValue;
